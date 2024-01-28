@@ -1,34 +1,29 @@
 @echo off
-
 :menu
-cls
 echo Menü:
-echo 1. Option 1
-echo 2. Option 2
-echo 3. Option 3
-rem Füge hier weitere Optionen hinzu
-echo 10. Option 10
-echo Q. Beenden
+echo 1. A* Algorithmus
+echo 2. Dijkstra Algorithmus
+echo 3. BFS Algorithmus
+echo 4. Maze generation Algorithmus
+echo 5. DFS Algorithmus
+echo 6. Bidirectional search Algorithmus
+echo 7. Bellman-Ford Algorithmus
+echo 8. Floyd-Warshall Algorithmus
+echo q. Beenden
+echo.
+set /p choice="Wähle eine Option: "
 
-set /p choice=Wähle eine Option:
+if "%choice%"=="q" goto end
+if "%choice%"=="Q" goto end
 
-if "%choice%"=="1" (
-    echo Du hast Option 1 ausgewählt.
-    python path_finding.py "1"
-) else if "%choice%"=="2" (
-    echo Du hast Option 2 ausgewählt.
-    python path_finding.py "2"
-) else if "%choice%"=="3" (
-    echo Du hast Option 3 ausgewählt.
-    python path_finding.py "3"
-) else if "%choice%"=="10" (
-    echo Du hast Option 10 ausgewählt.
-    python path_finding.py "10"
-) else if /i "%choice%"=="Q" (
-    echo Das Programm wird beendet.
-    exit /b 0
+if "%choice%" GEQ "1" if "%choice%" LEQ "8" (
+    python path_finding.py %choice%
+    goto menu
 ) else (
     echo Ungültige Auswahl. Bitte versuche es erneut.
-    pause
     goto menu
 )
+
+:end
+echo Das Programm wird beendet.
+

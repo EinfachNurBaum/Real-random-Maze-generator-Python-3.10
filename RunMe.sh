@@ -1,49 +1,32 @@
 #!/bin/bash
 
-# Funktion zum Ausführen des ausgewählten Befehls
-run_command() {
-    case $1 in
-        1)
-            echo "Du hast Option 1 ausgewählt."
-            python path_finding.py "1"
-            ;;
-        2)
-            echo "Du hast Option 2 ausgewählt."
-            python path_finding.py "2"
-            ;;
-        3)
-            echo "Du hast Option 3 ausgewählt."
-            python path_finding.py "3"
-            ;;
-        # Füge hier weitere Optionen hinzu
-        10)
-            echo "Du hast Option 10 ausgewählt."
-            python path_finding.py "10"
-            ;;
-        q|Q)
-            echo "Das Programm wird beendet."
-            exit 0
-            ;;
-        *)
-            echo "Ungültige Auswahl. Bitte versuche es erneut."
-            ;;
-    esac
-}
-
 # Hauptprogramm
 while true; do
     # Menü anzeigen
     echo "Menü:"
-    echo "1. Option 1"
-    echo "2. Option 2"
-    echo "3. Option 3"
-    # Füge hier weitere Optionen hinzu
-    echo "10. Option 10"
+    echo "1. A* Algorithmus"
+    echo "2. Dijkstra Algorithmus"
+    echo "3. BFS Algorithmus"
+    echo "4. Maze generation Algorithmus"
+    echo "5. DFS Algorithmus"
+    echo "6. Bidirectional search Algorithmus"
+    echo "7. Bellman-Ford Algorithmus"
+    echo "8. Floyd-Warshall Algorithmus"
     echo "q. Beenden"
 
     # Benutzereingabe lesen
     read -p "Wähle eine Option: " choice
 
+    # Check für Beenden
+    if [[ "$choice" == "q" || "$choice" == "Q" ]]; then
+        echo "Das Programm wird beendet."
+        exit 0
+    fi
+
     # Ausgewählten Befehl ausführen
-    run_command "$choice"
+    if [[ "$choice" =~ ^[1-8]$ ]]; then
+        python path_finding.py "$choice"
+    else
+        echo "Ungültige Auswahl. Bitte versuche es erneut."
+    fi
 done
